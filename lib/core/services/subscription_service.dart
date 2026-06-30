@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -149,6 +151,14 @@ class SubscriptionService extends ChangeNotifier {
     _isPro = true;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_kPrefIsPro, true);
+    // Write to Firestore so Cloud Functions can verify pro status server-side
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .set({'isPro': true}, SetOptions(merge: true));
+    }
     notifyListeners();
   }
 
