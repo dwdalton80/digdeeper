@@ -21,8 +21,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await TypographyService().load();
   await ThemeService().load();
-  await SubscriptionService.instance.init();
-
   // Portrait only
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -36,9 +34,12 @@ void main() async {
     statusBarBrightness: Brightness.dark,
   ));
 
+  // Firebase must be initialized before SubscriptionService (which uses Firestore)
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await SubscriptionService.instance.init();
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 

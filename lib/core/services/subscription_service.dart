@@ -75,6 +75,10 @@ class SubscriptionService extends ChangeNotifier {
     if (response.error != null) {
       debugPrint('IAP product query error: ${response.error}');
     }
+    if (response.notFoundIDs.isNotEmpty) {
+      debugPrint('IAP products not found in App Store: ${response.notFoundIDs}');
+    }
+    debugPrint('IAP products loaded: ${response.productDetails.map((p) => p.id).toList()}');
     _products = response.productDetails
       ..sort((a, b) {
         // Monthly first, yearly second in UI
