@@ -5,12 +5,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/bible_constants.dart';
+import '../../core/providers/subscription_provider.dart';
 import '../../core/services/ai_study_service.dart';
 import '../../core/services/badge_service.dart';
 import '../../core/services/streak_service.dart';
 import '../../core/services/bible_service.dart';
 import '../../models/user_profile.dart';
 import '../home/home_screen.dart' show userProfileProvider;
+import '../paywall/paywall_screen.dart';
 
 // ── Study method meta ─────────────────────────────────────────────────────────
 
@@ -169,6 +171,10 @@ class _AiStudyScreenState extends ConsumerState<AiStudyScreen> {
           orElse: () => _methods.first);
 
   Future<void> _startStudy() async {
+    if (!ref.read(isProProvider)) {
+      await showPaywall(context);
+      return;
+    }
     setState(() { _view = _StudyView.loading; _error = null; });
 
     try {

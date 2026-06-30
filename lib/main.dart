@@ -9,6 +9,7 @@ import 'firebase_options.dart';
 import 'app.dart';
 import 'core/services/typography_service.dart';
 import 'core/services/theme_service.dart';
+import 'core/services/subscription_service.dart';
 
 // Top-level FCM background handler (required by firebase_messaging)
 @pragma('vm:entry-point')
@@ -20,6 +21,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await TypographyService().load();
   await ThemeService().load();
+  await SubscriptionService.instance.init();
 
   // Portrait only
   await SystemChrome.setPreferredOrientations([

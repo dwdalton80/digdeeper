@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import '../../core/constants/colors.dart';
+import '../../core/providers/subscription_provider.dart';
 import '../../core/services/badge_service.dart';
+import '../paywall/paywall_screen.dart';
 
 // ── Note model ────────────────────────────────────────────────────────────────
 
@@ -67,14 +70,14 @@ class NoteEntry {
 
 // ── Main screen ───────────────────────────────────────────────────────────────
 
-class NotesScreen extends StatefulWidget {
+class NotesScreen extends ConsumerStatefulWidget {
   const NotesScreen({super.key});
 
   @override
-  State<NotesScreen> createState() => _NotesScreenState();
+  ConsumerState<NotesScreen> createState() => _NotesScreenState();
 }
 
-class _NotesScreenState extends State<NotesScreen> {
+class _NotesScreenState extends ConsumerState<NotesScreen> {
   final _searchCtrl = TextEditingController();
   String _search = '';
   String _filter = 'All'; // 'All' | 'Personal' | 'Sermon' | 'Study'
@@ -174,6 +177,10 @@ class _NotesScreenState extends State<NotesScreen> {
   // ── AI Insights ─────────────────────────────────────────────────────────────
 
   Future<void> _showAiInsights(List<NoteEntry> notes) async {
+    if (!ref.read(isProProvider)) {
+      await showPaywall(context);
+      return;
+    }
     if (notes.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Add some notes first to get insights.')));
