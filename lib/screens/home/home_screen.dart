@@ -89,8 +89,6 @@ final liveStatsProvider = StreamProvider<Map<String, int>>((ref) {
   // Count notes and highlights in real time
   final notesStream = FirebaseFirestore.instance
       .collection('notes').doc(uid).collection('entries').snapshots();
-  final highlightsStream = FirebaseFirestore.instance
-      .collection('highlights').doc(uid).collection('verses').snapshots();
 
   return notesStream.asyncMap((notesSnap) async {
     final hlSnap = await FirebaseFirestore.instance

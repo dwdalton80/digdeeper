@@ -211,6 +211,132 @@ const kAllPlans = <PlanDef>[
       PlanPassage(bookId: 'col', chapter: 4, label: 'Colossians 4'),
     ],
   ),
+
+  // 6. Who Am I? — 7 days on identity
+  PlanDef(
+    id: 'who_am_i',
+    imagePath: 'assets/images/plans/plan_who_am_i.jpg',
+    title: 'Who Am I?',
+    subtitle: '7 days · Identity in Christ',
+    description:
+        'The most important question you\'ll answer. Seven passages that cut '
+        'through every label the world puts on you and show you who God says you are.',
+    durationDays: 7,
+    passages: [
+      PlanPassage(bookId: 'gen', chapter: 1,  label: 'Genesis 1 — Made in His image'),
+      PlanPassage(bookId: 'psa', chapter: 139, label: 'Psalm 139 — Fearfully made'),
+      PlanPassage(bookId: 'jer', chapter: 1,  label: 'Jeremiah 1 — Called before you were born'),
+      PlanPassage(bookId: 'eph', chapter: 1,  label: 'Ephesians 1 — Every spiritual blessing'),
+      PlanPassage(bookId: 'rom', chapter: 8,  label: 'Romans 8 — Children of God'),
+      PlanPassage(bookId: 'gal', chapter: 3,  label: 'Galatians 3 — Heirs of the promise'),
+      PlanPassage(bookId: '1pe', chapter: 2,  label: '1 Peter 2 — Chosen and royal'),
+    ],
+  ),
+
+  // 7. Peace Over Anxiety — 10 days
+  PlanDef(
+    id: 'peace_over_anxiety',
+    imagePath: 'assets/images/plans/plan_peace_over_anxiety.jpg',
+    title: 'Peace Over Anxiety',
+    subtitle: '10 days · Rest & Trust',
+    description:
+        'When everything feels uncertain — school, work, relationships, the future — '
+        'the Bible speaks directly into it. Ten readings to trade anxious thoughts for genuine peace.',
+    durationDays: 10,
+    passages: [
+      PlanPassage(bookId: 'php', chapter: 4,  label: 'Philippians 4 — Don\'t be anxious'),
+      PlanPassage(bookId: 'mat', chapter: 6,  label: 'Matthew 6 — Don\'t worry'),
+      PlanPassage(bookId: 'psa', chapter: 46, label: 'Psalm 46 — God is our refuge'),
+      PlanPassage(bookId: 'isa', chapter: 41, label: 'Isaiah 41 — Do not fear'),
+      PlanPassage(bookId: 'psa', chapter: 23, label: 'Psalm 23 — The Good Shepherd'),
+      PlanPassage(bookId: 'jhn', chapter: 14, label: 'John 14 — Troubled hearts'),
+      PlanPassage(bookId: '1pe', chapter: 5,  label: '1 Peter 5 — Cast your anxiety'),
+      PlanPassage(bookId: 'psa', chapter: 131, label: 'Psalm 131 — Calm and quiet'),
+      PlanPassage(bookId: 'heb', chapter: 4,  label: 'Hebrews 4 — Approach the throne'),
+      PlanPassage(bookId: 'rom', chapter: 8,  label: 'Romans 8 — Nothing separates us'),
+    ],
+  ),
+
+  // 8. Wisdom for Real Life — 14 days in Proverbs
+  PlanDef(
+    id: 'wisdom_real_life',
+    imagePath: 'assets/images/plans/plan_wisdom_real_life.jpg',
+    title: 'Wisdom for Real Life',
+    subtitle: '14 days · Proverbs',
+    description:
+        'Money. Friendship. Decisions. Relationships. Your words. Your reputation. '
+        'Proverbs covers everything you\'re navigating right now — one sharp chapter at a time.',
+    durationDays: 14,
+    passages: [
+      PlanPassage(bookId: 'pro', chapter: 1,  label: 'Proverbs 1 — Why wisdom matters'),
+      PlanPassage(bookId: 'pro', chapter: 2,  label: 'Proverbs 2 — Seek it like silver'),
+      PlanPassage(bookId: 'pro', chapter: 3,  label: 'Proverbs 3 — Trust, don\'t lean on yourself'),
+      PlanPassage(bookId: 'pro', chapter: 4,  label: 'Proverbs 4 — Guard your heart'),
+      PlanPassage(bookId: 'pro', chapter: 5,  label: 'Proverbs 5 — Purity and boundaries'),
+      PlanPassage(bookId: 'pro', chapter: 10, label: 'Proverbs 10 — Words and work'),
+      PlanPassage(bookId: 'pro', chapter: 12, label: 'Proverbs 12 — Integrity over image'),
+      PlanPassage(bookId: 'pro', chapter: 13, label: 'Proverbs 13 — Money and friendship'),
+      PlanPassage(bookId: 'pro', chapter: 15, label: 'Proverbs 15 — Soft answers'),
+      PlanPassage(bookId: 'pro', chapter: 16, label: 'Proverbs 16 — Plans and pride'),
+      PlanPassage(bookId: 'pro', chapter: 17, label: 'Proverbs 17 — True friendship'),
+      PlanPassage(bookId: 'pro', chapter: 20, label: 'Proverbs 20 — Honesty and decisions'),
+      PlanPassage(bookId: 'pro', chapter: 22, label: 'Proverbs 22 — Your reputation'),
+      PlanPassage(bookId: 'pro', chapter: 31, label: 'Proverbs 31 — Character that lasts'),
+    ],
+  ),
+
+  // 9. Mark: The Real Jesus — 16 days
+  PlanDef(
+    id: 'mark_real_jesus',
+    imagePath: 'assets/images/plans/plan_mark_real_jesus.jpg',
+    title: 'Mark: The Real Jesus',
+    subtitle: '16 days · Gospel of Mark',
+    description:
+        'The fastest gospel — no long speeches, just action. Mark writes like a '
+        'documentary: who Jesus actually is, what he actually does, and why it '
+        'changes everything. One chapter a day.',
+    durationDays: 16,
+    passages: [
+      PlanPassage(bookId: 'mrk', chapter: 1,  label: 'Mark 1 — Baptism & first miracles'),
+      PlanPassage(bookId: 'mrk', chapter: 2,  label: 'Mark 2 — Healing & controversy'),
+      PlanPassage(bookId: 'mrk', chapter: 3,  label: 'Mark 3 — Crowds & calling'),
+      PlanPassage(bookId: 'mrk', chapter: 4,  label: 'Mark 4 — Parables & a storm'),
+      PlanPassage(bookId: 'mrk', chapter: 5,  label: 'Mark 5 — Demons, death & healing'),
+      PlanPassage(bookId: 'mrk', chapter: 6,  label: 'Mark 6 — Rejection & 5,000 fed'),
+      PlanPassage(bookId: 'mrk', chapter: 7,  label: 'Mark 7 — Clean and unclean'),
+      PlanPassage(bookId: 'mrk', chapter: 8,  label: 'Mark 8 — Who do you say I am?'),
+      PlanPassage(bookId: 'mrk', chapter: 9,  label: 'Mark 9 — Transfiguration'),
+      PlanPassage(bookId: 'mrk', chapter: 10, label: 'Mark 10 — Wealth, power & service'),
+      PlanPassage(bookId: 'mrk', chapter: 11, label: 'Mark 11 — Into Jerusalem'),
+      PlanPassage(bookId: 'mrk', chapter: 12, label: 'Mark 12 — Hard questions'),
+      PlanPassage(bookId: 'mrk', chapter: 13, label: 'Mark 13 — The end of the age'),
+      PlanPassage(bookId: 'mrk', chapter: 14, label: 'Mark 14 — Betrayal & arrest'),
+      PlanPassage(bookId: 'mrk', chapter: 15, label: 'Mark 15 — The cross'),
+      PlanPassage(bookId: 'mrk', chapter: 16, label: 'Mark 16 — He is risen'),
+    ],
+  ),
+
+  // 10. Love & Relationships God's Way — 7 days
+  PlanDef(
+    id: 'love_and_relationships',
+    imagePath: 'assets/images/plans/plan_love_and_relationships.jpg',
+    title: 'Love & Relationships',
+    subtitle: '7 days · Dating · Friendship · Love',
+    description:
+        'What does God actually say about love, attraction, dating, and friendship? '
+        'Seven honest passages that go deeper than rules and get to the heart of connection.',
+    durationDays: 7,
+    passages: [
+      PlanPassage(bookId: 'gen', chapter: 2,  label: 'Genesis 2 — Made for connection'),
+      PlanPassage(bookId: 'rut', chapter: 1,  label: 'Ruth 1 — Loyalty that costs something'),
+      PlanPassage(bookId: '1co', chapter: 13, label: '1 Corinthians 13 — What love really is'),
+      PlanPassage(bookId: 'pro', chapter: 27, label: 'Proverbs 27 — Iron sharpens iron'),
+      PlanPassage(bookId: 'sng', chapter: 2,  label: 'Song of Solomon 2 — Desire & beauty'),
+      PlanPassage(bookId: 'eph', chapter: 5,  label: 'Ephesians 5 — Sacrificial love'),
+      PlanPassage(bookId: '1jn', chapter: 4,  label: '1 John 4 — God is love'),
+    ],
+  ),
+
 ];
 
 /// Look up a plan by ID.

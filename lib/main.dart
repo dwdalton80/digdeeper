@@ -7,7 +7,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'firebase_options.dart';
 import 'app.dart';
-import 'screens/splash/splash_screen.dart';
 import 'core/services/typography_service.dart';
 import 'core/services/theme_service.dart';
 
@@ -108,14 +107,6 @@ void main() async {
       });
     } catch (_) {}
   });
-
-  // Show splash immediately
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: SplashScreen(),
-  ));
-
-  await Future.delayed(const Duration(milliseconds: 2500));
 
   runApp(const ProviderScope(child: DigDeeperApp()));
 }
