@@ -15,6 +15,7 @@ import '../../core/services/streak_service.dart';
 import '../../core/services/typography_service.dart';
 import '../../core/services/theme_service.dart';
 import '../home/home_screen.dart' show userProfileProvider;
+import '../../core/providers/subscription_provider.dart';
 
 // ── Providers ──────────────────────────────────────────────────────────────────
 
@@ -156,7 +157,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 _UserHeader(
                   name: name,
                   levelLabel: levelLabel,
-                  isPremium: profileAsync.valueOrNull?.isPremium ?? false,
+                  isPremium: ref.watch(isProProvider),
                   avatarUrl: profileAsync.valueOrNull?.avatarUrl,
                   onEdit: () => _showEditSheet(context, name,
                     profileAsync.valueOrNull?.avatarUrl),
