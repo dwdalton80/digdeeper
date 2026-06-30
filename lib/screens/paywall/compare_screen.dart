@@ -52,7 +52,7 @@ const _features = [
   _Feature(
     icon: Icons.psychology_outlined,
     title: 'AI Study Sessions',
-    description: 'SOAP, Inductive, Word Study, Lectio Divina — full AI-guided deep dives.',
+    description: 'SOAP, Inductive, Greek/Hebrew, Lectio Divina — full AI-guided deep dives.',
     isPro: true,
   ),
   _Feature(

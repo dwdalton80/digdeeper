@@ -78,7 +78,7 @@ const _methods = [
   ),
   _MethodMeta(
     method: StudyMethod.wordStudy,
-    label: 'Word Study',
+    label: 'Greek/Hebrew',
     methodTag: 'Greek · Hebrew',
     subtitle: 'Unpack the original Greek or Hebrew meaning behind key words.',
     timeEstimate: '~10 min',
