@@ -145,6 +145,11 @@ class _DigDeeperAppState extends ConsumerState<DigDeeperApp>
   late final Animation<double> _splashOpacity;
   bool _splashVisible = true;
   bool _fadeStarted = false;
+  bool _minTimeElapsed = false;
+  bool _authResolved = false;
+
+  // Minimum time the splash is shown — long enough for the animation to play
+  static const _kMinSplashMs = 2400;
 
   @override
   void initState() {
@@ -156,6 +161,13 @@ class _DigDeeperAppState extends ConsumerState<DigDeeperApp>
     _splashOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(parent: _splashCtrl, curve: Curves.easeInOut),
     );
+
+    // Start the minimum timer immediately
+    Future.delayed(const Duration(milliseconds: _kMinSplashMs), () {
+      if (!mounted) return;
+      _minTimeElapsed = true;
+      _startFadeIfNeeded();
+    });
   }
 
   @override
@@ -164,8 +176,9 @@ class _DigDeeperAppState extends ConsumerState<DigDeeperApp>
     super.dispose();
   }
 
-  void _startFadeIfNeeded(bool authResolved) {
-    if (!authResolved || _fadeStarted) return;
+  void _startFadeIfNeeded({bool? authResolved}) {
+    if (authResolved != null) _authResolved = authResolved;
+    if (!_authResolved || !_minTimeElapsed || _fadeStarted) return;
     _fadeStarted = true;
     // Small delay so the first frame of the real app renders before we fade
     Future.delayed(const Duration(milliseconds: 100), () {
@@ -182,7 +195,7 @@ class _DigDeeperAppState extends ConsumerState<DigDeeperApp>
     final router    = ref.watch(routerProvider);
     final themeMode = ref.watch(themeModeProvider).mode;
 
-    _startFadeIfNeeded(!authState.isLoading);
+    _startFadeIfNeeded(authResolved: !authState.isLoading);
 
     return MaterialApp.router(
       title: 'Dig Deeper',
