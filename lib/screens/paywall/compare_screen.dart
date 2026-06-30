@@ -44,6 +44,12 @@ const _features = [
     isPro: false,
   ),
   _Feature(
+    icon: Icons.group_outlined,
+    title: 'Join 1 Group',
+    description: 'Study with one community group using an invite code.',
+    isPro: false,
+  ),
+  _Feature(
     icon: Icons.psychology_outlined,
     title: 'AI Study Sessions',
     description: 'SOAP, Inductive, Word Study, Lectio Divina — full AI-guided deep dives.',
@@ -65,6 +71,12 @@ const _features = [
     icon: Icons.translate_outlined,
     title: 'Greek & Hebrew Explorer',
     description: 'Go deeper with original language word studies on any passage.',
+    isPro: true,
+  ),
+  _Feature(
+    icon: Icons.groups_outlined,
+    title: 'Unlimited Groups',
+    description: 'Create and join as many groups as you want. Lead multiple communities.',
     isPro: true,
   ),
 ];

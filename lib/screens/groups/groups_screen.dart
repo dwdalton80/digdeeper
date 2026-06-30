@@ -4,11 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../core/constants/colors.dart';
+import '../../core/providers/subscription_provider.dart';
 import '../../core/services/badge_service.dart';
+import '../paywall/compare_screen.dart';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -46,11 +49,11 @@ List<Color> _groupGradient(String groupId) {
 
 // ── Main Screen ───────────────────────────────────────────────────────────────
 
-class GroupsScreen extends StatelessWidget {
+class GroupsScreen extends ConsumerWidget {
   const GroupsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     if (_uid == null) {
       return Scaffold(
         body: Center(child: Text('Sign in to view groups',
@@ -67,7 +70,7 @@ class GroupsScreen extends StatelessWidget {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator(color: AppColors.gold)));
         }
-        if (snap.hasError) return _EmptyGroupsView();
+        if (snap.hasError) return _EmptyGroupsView(groupCount: 0);
         // Sort client-side to avoid composite index requirement
         final groups = (snap.data?.docs ?? [])
           ..sort((a, b) {
@@ -75,8 +78,9 @@ class GroupsScreen extends StatelessWidget {
             final tb = ((b.data() as Map)['lastActivity'] as Timestamp?)?.toDate() ?? DateTime(0);
             return tb.compareTo(ta);
           });
-        if (groups.isEmpty) return _EmptyGroupsView();
-        return _GroupsHomeView(groups: groups);
+        final isPro = ref.watch(isProProvider);
+        if (groups.isEmpty) return _EmptyGroupsView(groupCount: 0, isPro: isPro);
+        return _GroupsHomeView(groups: groups, isPro: isPro);
       },
     );
   }
@@ -85,6 +89,18 @@ class GroupsScreen extends StatelessWidget {
 // ── Empty state ───────────────────────────────────────────────────────────────
 
 class _EmptyGroupsView extends StatelessWidget {
+  final int groupCount;
+  final bool isPro;
+  const _EmptyGroupsView({required this.groupCount, this.isPro = false});
+
+  void _guardedAction(BuildContext context, VoidCallback action) {
+    if (!isPro && groupCount >= 1) {
+      showCompareScreen(context);
+    } else {
+      action();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,9 +111,11 @@ class _EmptyGroupsView extends StatelessWidget {
             Text('Groups', style: TextStyle(fontFamily: 'Lora', fontSize: 26,
               fontWeight: FontWeight.bold, color: AppColors.label(context))),
             const Spacer(),
-            _HeaderIconBtn(icon: Icons.group_add_outlined, onTap: () => _showJoinGroup(context)),
+            _HeaderIconBtn(icon: Icons.group_add_outlined,
+              onTap: () => _guardedAction(context, () => _showJoinGroup(context))),
             const SizedBox(width: 8),
-            _HeaderIconBtn(icon: Icons.add, onTap: () => _showCreateGroup(context)),
+            _HeaderIconBtn(icon: Icons.add,
+              onTap: () => _guardedAction(context, () => _showCreateGroup(context))),
           ]),
           const Spacer(),
           Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -113,9 +131,11 @@ class _EmptyGroupsView extends StatelessWidget {
               style: TextStyle(fontFamily: 'Inter', fontSize: 14, color: AppColors.sublabel(context), height: 1.55)),
           ])),
           const Spacer(),
-          _GoldBtn(label: 'Create a Group', onTap: () => _showCreateGroup(context)),
+          _GoldBtn(label: 'Create a Group',
+            onTap: () => _guardedAction(context, () => _showCreateGroup(context))),
           const SizedBox(height: 12),
-          _OutlineBtn(label: 'Join with Code', icon: Icons.group_add_outlined, onTap: () => _showJoinGroup(context)),
+          _OutlineBtn(label: 'Join with Code', icon: Icons.group_add_outlined,
+            onTap: () => _guardedAction(context, () => _showJoinGroup(context))),
           const SizedBox(height: 8),
         ]),
       )),
@@ -127,7 +147,8 @@ class _EmptyGroupsView extends StatelessWidget {
 
 class _GroupsHomeView extends StatefulWidget {
   final List<QueryDocumentSnapshot> groups;
-  const _GroupsHomeView({required this.groups});
+  final bool isPro;
+  const _GroupsHomeView({required this.groups, this.isPro = false});
 
   @override
   State<_GroupsHomeView> createState() => _GroupsHomeViewState();
@@ -136,6 +157,14 @@ class _GroupsHomeView extends StatefulWidget {
 class _GroupsHomeViewState extends State<_GroupsHomeView> {
   // null = All groups
   String? _selectedGroupId;
+
+  void _guardedGroupAction(BuildContext context, VoidCallback action) {
+    if (!widget.isPro && widget.groups.length >= 1) {
+      showCompareScreen(context);
+    } else {
+      action();
+    }
+  }
 
   int get _totalMembers => widget.groups.fold(0, (sum, g) {
     final d = g.data() as Map<String, dynamic>;
@@ -161,9 +190,11 @@ class _GroupsHomeViewState extends State<_GroupsHomeView> {
             Text('Groups', style: TextStyle(fontFamily: 'Lora', fontSize: 26,
               fontWeight: FontWeight.bold, color: AppColors.label(context))),
             const Spacer(),
-            _HeaderIconBtn(icon: Icons.group_add_outlined, onTap: () => _showJoinGroup(context)),
+            _HeaderIconBtn(icon: Icons.group_add_outlined,
+              onTap: () => _guardedGroupAction(context, () => _showJoinGroup(context))),
             const SizedBox(width: 8),
-            _HeaderIconBtn(icon: Icons.add, onTap: () => _showCreateGroup(context)),
+            _HeaderIconBtn(icon: Icons.add,
+              onTap: () => _guardedGroupAction(context, () => _showCreateGroup(context))),
           ]),
         )),
 
