@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — Dig Deeper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0F0F0F; --card: #1A1A1A; --card-mid: #222222;
+      --border: #2A2A2A; --gold: #C8A96E; --white: #FAFAF7; --muted: #888888;
+    }
+    body { background: var(--black); color: var(--white); font-family: 'Inter', sans-serif; line-height: 1.7; }
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px; border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Lora', serif; font-size: 20px; font-weight: 700; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-back { color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--white); }
+    .container { max-width: 760px; margin: 0 auto; padding: 60px 24px 100px; }
+    .page-label { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
+    h1 { font-family: 'Lora', serif; font-size: 38px; font-weight: 700; margin-bottom: 16px; }
+    .subtitle { font-size: 17px; color: var(--muted); margin-bottom: 52px; }
+    /* Contact card */
+    .contact-card {
+      background: linear-gradient(135deg, rgba(200,169,110,0.08), var(--card));
+      border: 1px solid rgba(200,169,110,0.3);
+      border-radius: 20px; padding: 32px;
+      display: flex; align-items: center; gap: 24px;
+      margin-bottom: 60px;
+    }
+    .contact-icon {
+      width: 56px; height: 56px; flex-shrink: 0;
+      background: rgba(200,169,110,0.15); border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+    }
+    .contact-card h2 { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+    .contact-card p { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
+    .contact-card a {
+      display: inline-block;
+      background: var(--gold); color: #000;
+      padding: 10px 22px; border-radius: 10px;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .contact-card a:hover { background: #E8C87A; }
+    /* FAQ */
+    h2.faq-title { font-family: 'Lora', serif; font-size: 26px; font-weight: 700; margin-bottom: 24px; }
+    .faq { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 12px; }
+    .faq summary {
+      padding: 20px 24px; font-size: 16px; font-weight: 600;
+      cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--card);
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; font-size: 20px; color: var(--gold); font-weight: 400; }
+    .faq[open] summary::after { content: '−'; }
+    .faq-body { padding: 0 24px 20px; font-size: 15px; color: #BBBBBB; background: var(--card); }
+    .faq-body p { margin-bottom: 10px; }
+    .faq-body p:last-child { margin-bottom: 0; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 52px 0; }
+    a { color: var(--gold); }
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      h1 { font-size: 28px; }
+      .contact-card { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/"><img src="/logo.png" alt="Dig Deeper" style="width:36px;height:36px;border-radius:8px;margin-right:10px;vertical-align:middle;" />Dig <span>Deeper</span></a>
+  <a class="nav-back" href="/">← Back to home</a>
+</nav>
+
+<div class="container">
+  <div class="page-label">Support</div>
+  <h1>How can we help?</h1>
+  <p class="subtitle">Browse common questions below or reach out — we're happy to help.</p>
+
+  <!-- Contact -->
+  <div class="contact-card">
+    <div class="contact-icon">✉️</div>
+    <div>
+      <h2>Contact Support</h2>
+      <p>We typically respond within 1–2 business days.</p>
+      <a href="mailto:support@digdeeperapp.com">support@digdeeperapp.com</a>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <h2 class="faq-title">Frequently Asked Questions</h2>
+
+  <details class="faq">
+    <summary>How do I start an AI Study session?</summary>
+    <div class="faq-body">
+      <p>From the home screen, tap <strong>AI Study</strong>. Choose a book and chapter, then select a study method (SOAP, Inductive, Swedish, Lectio Divina, or Greek/Hebrew). Tap <strong>Start Study</strong> — the AI will generate a full study guide for that passage.</p>
+      <p>AI Study requires a Dig Deeper Pro subscription. New users get a 3-day free trial.</p>
+    </div>
+  </details>
+
+  <details class="faq">
+    <summary>What's included in the free plan?</summary>
+    <div class="faq-body">
+      <p>The free plan includes full Bible reading in KJV, NIV, and CSB, verse highlighting, notes and journaling, reading plans, joining one group, badges, and streaks. No time limit — free forever.</p>
+    </div>
+  </details>
+
+  <details class="faq">
+    <summary>How do I cancel my subscription?</summary>
+    <div class="faq-body">
+      <p>Dig Deeper subscriptions are managed by Apple. To cancel:</p>
+      <p>1. Open the <strong>Settings</strong> app on your iPhone.<br/>
+         2. Tap your name at the top → <strong>Subscriptions</strong>.<br/>
+         3. Tap <strong>Dig Deeper</strong> and select <strong>Cancel Subscription</strong>.</p>
+      <p>You'll retain Pro access until the end of your billing period.</p>
+    </div>
+  </details>
+
+  <details class="faq">
+    <summary>How do I restore my purchases on a new device?</summary>
+    <div class="faq-body">
+      <p>Sign in with the same Apple ID you used to purchase. Then open the paywall screen and tap <strong>Restore Purchases</strong> at the bottom. Your Pro access will be restored automatically.</p>
+    </div>
+  </details>
+
+  <details class="faq">
+    <summary>How do groups work?</summary>
+    <div class="faq-body">
+      <p>You can create a group or join one with a 6-letter invite code. Share your group's code with friends and they can join from the Groups tab. Free users can be in one group; Pro users can create and join unlimited groups.</p>
+    </div>
+  </details>
+
+  <details class="faq">
+    <summary>My highlights aren't showing up. What should I do?</summary>
+    <div class="faq-body">
+      <p>Make sure you're signed in — highlights are tied to your account and require an internet connection to load. Try closing and reopening the app. If the issue persists, contact us at <a href="mailto:support@digdeeperapp.com">support@digdeeperapp.com</a>.</p>
+    </div>
+  </details>
+
+  <details class="faq">
+    <summary>The AI study is taking a long time. Is that normal?</summary>
+    <div class="faq-body">
+      <p>AI study generation typically takes 5–15 seconds depending on your connection. Results are cached for 7 days, so the same passage and method will load instantly on repeat visits. If it consistently times out, please contact us.</p>
+    </div>
+  </details>
+
+  <details class="faq">
+    <summary>How do I enable morning verse notifications?</summary>
+    <div class="faq-body">
+      <p>Go to your <strong>Profile</strong> → tap the settings gear → toggle <strong>Morning Verse</strong> on. You'll be prompted to allow notifications if you haven't already. Notifications are sent at 9:30 AM in your local time.</p>
+    </div>
+  </details>
+
+  <details class="faq">
+    <summary>How do I delete my account?</summary>
+    <div class="faq-body">
+      <p>To permanently delete your account and all associated data, email us at <a href="mailto:support@digdeeperapp.com">support@digdeeperapp.com</a> with the subject line "Delete My Account." We will process your request within 30 days.</p>
+    </div>
+  </details>
+
+  <hr />
+  <p style="font-size:14px; color: var(--muted);">&copy; 2025 Dig Deeper. All rights reserved. · <a href="/">Home</a> · <a href="/privacy">Privacy Policy</a></p>
+</div>
+
+</body>
+</html>
