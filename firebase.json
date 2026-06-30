@@ -1,0 +1,25 @@
+{
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "flutter": {
+    "platforms": {
+      "ios": {
+        "default": {
+          "projectId": "studyfire-11710",
+          "appId": "1:225393232981:ios:f807c07548bae58b8958dc",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "studyfire-11710",
+          "configurations": {
+            "ios": "1:225393232981:ios:f807c07548bae58b8958dc"
+          }
+        }
+      }
+    }
+  }
+}
