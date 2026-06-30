@@ -161,7 +161,7 @@ class SubscriptionService extends ChangeNotifier {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(uid)
-          .set({'isPro': true}, SetOptions(merge: true));
+          .set({'isPro': true, 'isPremium': true}, SetOptions(merge: true));
     }
     notifyListeners();
   }
