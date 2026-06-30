@@ -12,6 +12,7 @@ import '../../core/services/streak_service.dart';
 import '../../core/services/bible_service.dart';
 import '../../models/user_profile.dart';
 import '../home/home_screen.dart' show userProfileProvider;
+import '../paywall/compare_screen.dart';
 import '../paywall/paywall_screen.dart';
 
 // ── Study method meta ─────────────────────────────────────────────────────────
@@ -172,7 +173,7 @@ class _AiStudyScreenState extends ConsumerState<AiStudyScreen> {
 
   Future<void> _startStudy() async {
     if (!ref.read(isProProvider)) {
-      await showPaywall(context);
+      await showCompareScreen(context);
       return;
     }
     setState(() { _view = _StudyView.loading; _error = null; });

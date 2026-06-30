@@ -11,6 +11,7 @@ import 'package:printing/printing.dart';
 import '../../core/constants/colors.dart';
 import '../../core/providers/subscription_provider.dart';
 import '../../core/services/badge_service.dart';
+import '../paywall/compare_screen.dart';
 import '../paywall/paywall_screen.dart';
 
 // ── Note model ────────────────────────────────────────────────────────────────
@@ -178,7 +179,7 @@ class _NotesScreenState extends ConsumerState<NotesScreen> {
 
   Future<void> _showAiInsights(List<NoteEntry> notes) async {
     if (!ref.read(isProProvider)) {
-      await showPaywall(context);
+      await showCompareScreen(context);
       return;
     }
     if (notes.isEmpty) {
