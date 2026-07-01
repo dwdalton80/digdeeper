@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -381,6 +382,7 @@ class _MergedFeedSliver extends StatefulWidget {
 class _MergedFeedSliverState extends State<_MergedFeedSliver> {
   bool _loading = true;
   final Map<String, List<Map<String, dynamic>>> _cache = {};
+  final Map<String, StreamSubscription<QuerySnapshot>> _subs = {};
 
   List<Map<String, dynamic>> get _visibleItems {
     final source = widget.filterGroupId != null
@@ -394,29 +396,57 @@ class _MergedFeedSliverState extends State<_MergedFeedSliver> {
       })).take(30).toList();
   }
 
+  void _subscribeToGroup(String gid) {
+    if (_subs.containsKey(gid)) return; // already subscribed
+    final sub = FirebaseFirestore.instance
+        .collection('groups').doc(gid).collection('feed')
+        .orderBy('createdAt', descending: true).limit(15)
+        .snapshots()
+        .listen(
+          (snap) {
+            _cache[gid] = snap.docs
+                .map((d) => {...d.data(), 'feedDocId': d.id, 'groupId': gid})
+                .toList();
+            if (mounted) setState(() => _loading = false);
+          },
+          onError: (e) {
+            debugPrint('Feed listener error for $gid: $e');
+            // Stop spinner even on error so UI doesn't hang
+            if (mounted) setState(() => _loading = false);
+          },
+        );
+    _subs[gid] = sub;
+  }
+
   @override
   void initState() {
     super.initState();
-    for (final gid in widget.groupIds) {
-      FirebaseFirestore.instance
-          .collection('groups').doc(gid).collection('feed')
-          .orderBy('createdAt', descending: true).limit(15)
-          .snapshots()
-          .listen((snap) {
-        _cache[gid] = snap.docs
-            .map((d) => {...d.data(), 'feedDocId': d.id, 'groupId': gid})
-            .toList();
-        if (mounted) setState(() => _loading = false);
-      });
+    if (widget.groupIds.isEmpty) {
+      _loading = false;
+    } else {
+      for (final gid in widget.groupIds) {
+        _subscribeToGroup(gid);
+      }
     }
-    if (widget.groupIds.isEmpty) setState(() => _loading = false);
   }
 
   @override
   void didUpdateWidget(_MergedFeedSliver old) {
     super.didUpdateWidget(old);
-    // Rebuild when filter changes — no extra fetch needed, data already cached
+    // Subscribe to any newly added group IDs
+    for (final gid in widget.groupIds) {
+      _subscribeToGroup(gid);
+    }
+    // Rebuild when filter changes
     if (old.filterGroupId != widget.filterGroupId) setState(() {});
+  }
+
+  @override
+  void dispose() {
+    for (final sub in _subs.values) {
+      sub.cancel();
+    }
+    super.dispose();
   }
 
   @override
